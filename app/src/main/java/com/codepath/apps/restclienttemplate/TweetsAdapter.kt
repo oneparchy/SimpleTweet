@@ -10,9 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.codepath.apps.restclienttemplate.models.Tweet
 
-class TweetsAdapter(val tweets: List<Tweet>) : RecyclerView.Adapter<TweetsAdapter.ViewHolder>() {
+class TweetsAdapter(private val tweets: ArrayList<Tweet>) : RecyclerView.Adapter<TweetsAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TweetsAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val context = parent.context
         val inflater = LayoutInflater.from(context)
         //Inflate item layout
@@ -20,7 +20,7 @@ class TweetsAdapter(val tweets: List<Tweet>) : RecyclerView.Adapter<TweetsAdapte
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: TweetsAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         //populate data into the item through the viewholder
 
         //Get data model based on position
@@ -29,6 +29,7 @@ class TweetsAdapter(val tweets: List<Tweet>) : RecyclerView.Adapter<TweetsAdapte
         //set item views based on views and data model
         holder.tvUsername.text = tweet.user?.name       //add null safety check in case user was not parsed properly
         holder.tvTweetBody.text = tweet.body
+        holder.tvTweetAge.text = tweet.getFormattedTimestamp()
         //use glide to load the profile image into the image view
         Glide.with(holder.itemView).load(tweet.user?.publicImageUrl).into(holder.ivProfileImage)
 
@@ -38,9 +39,22 @@ class TweetsAdapter(val tweets: List<Tweet>) : RecyclerView.Adapter<TweetsAdapte
         return tweets.size
     }
 
+    // Clean all elements of the recycler
+    fun clear() {
+        tweets.clear()
+        notifyDataSetChanged()
+    }
+
+    // Add a list of items -- change to type used
+    fun addAll(tweetList: List<Tweet>) {
+        tweets.addAll(tweetList)
+        notifyDataSetChanged()
+    }
+
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val ivProfileImage = itemView.findViewById<ImageView>(R.id.ivProfileImage)
         val  tvUsername = itemView.findViewById<TextView>(R.id.tvUsername)
         val tvTweetBody = itemView.findViewById<TextView>(R.id.tvTweetBody)
+        val tvTweetAge = itemView.findViewById<TextView>(R.id.tvTweetAge)
     }
 }
