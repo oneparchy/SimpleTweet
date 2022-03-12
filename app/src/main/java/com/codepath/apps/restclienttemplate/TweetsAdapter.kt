@@ -1,5 +1,6 @@
 package com.codepath.apps.restclienttemplate
 
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import androidx.appcompat.view.menu.ActionMenuItemView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.codepath.apps.restclienttemplate.models.Tweet
+import kotlin.random.Random
 
 class TweetsAdapter(private val tweets: ArrayList<Tweet>) : RecyclerView.Adapter<TweetsAdapter.ViewHolder>() {
 
@@ -17,6 +19,11 @@ class TweetsAdapter(private val tweets: ArrayList<Tweet>) : RecyclerView.Adapter
         val inflater = LayoutInflater.from(context)
         //Inflate item layout
         val view = inflater.inflate(R.layout.item_tweet, parent, false)
+        /*   //test code to add a random background color to each Tweet
+        val androidColors = Resources.getSystem().getIntArray(R.array.androidcolors)
+        val randomAndroidColor = androidColors[Random(androidColors.size).nextInt()]
+        view.setBackgroundColor(randomAndroidColor)
+        */
         return ViewHolder(view)
     }
 
