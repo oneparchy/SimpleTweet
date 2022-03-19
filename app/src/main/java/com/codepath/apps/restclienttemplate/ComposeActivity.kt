@@ -3,9 +3,12 @@ package com.codepath.apps.restclienttemplate
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import com.codepath.apps.restclienttemplate.models.Tweet
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler
@@ -16,6 +19,7 @@ class ComposeActivity : AppCompatActivity() {
 
     lateinit var etNewTweet: EditText
     lateinit var btnTweet: Button
+    lateinit var tvRemChars: TextView
     lateinit var client:TwitterClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,7 +28,24 @@ class ComposeActivity : AppCompatActivity() {
 
         etNewTweet = findViewById(R.id.etNewTweet)
         btnTweet = findViewById(R.id.btnTweet)
+        tvRemChars = findViewById(R.id.tvRemChars)
         client = TwitterApplication.getRestClient(this)
+
+        //Update Textview to show remaining character count as user types
+        val textWatcher = object: TextWatcher {
+            //unused
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+            //unused
+            override fun afterTextChanged(p0: Editable?) {
+            }
+            //used
+            override fun onTextChanged(s: CharSequence?, start: Int, count: Int, before: Int) {
+                val rc = 279-start+count
+                tvRemChars.text = "$rc characters remaining"
+            }
+        }
+        etNewTweet.addTextChangedListener(textWatcher)
 
         //Handle the user's click on the tweet button
         btnTweet.setOnClickListener {

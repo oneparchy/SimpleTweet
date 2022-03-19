@@ -28,4 +28,14 @@
         android:text="Tweet"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etNewTweet" />
+
+    <TextView
+        android:id="@+id/tvRemChars"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_margin="10dp"
+        android:text="280 characters remaining"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etNewTweet" />
 </androidx.constraintlayout.widget.ConstraintLayout>
