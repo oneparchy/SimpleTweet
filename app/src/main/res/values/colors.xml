@@ -17,6 +17,10 @@
     <item name="darkgreen" type="color">#FF669900</item>
     <item name="darkorange" type="color">#FFFF8800</item>
     <item name="darkred" type="color">#FFCC0000</item>
+    <item name="twitter_blue" type="color">#1DA1F2</item>
+    <item name="twitter_black" type="color">#14171A</item>
+    <item name="twitter_dark_gray" type="color">#657786</item>
+    <item name="twitter_light_gray" type="color">#AAB8C2</item>
 
     <integer-array name="androidcolors">
         <item>@color/blue</item>
