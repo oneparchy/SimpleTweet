@@ -65,9 +65,25 @@ class TimelineActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.compose) {
             val i = Intent(this,ComposeActivity::class.java)
-            startActivity(i)
+            startActivityForResult(i, REQUEST_CODE)
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    //This function is called when we return from ComposeActivity
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        //REQUEST_CODE defined above
+        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
+            //Extract tweet from result extras
+            val tweet = data?.getParcelableExtra("tweet") as Tweet
+            //Update timeline
+            //Modify data source of tweets
+            tweets.add(0,tweet)
+            //Update adapter
+            adapter.notifyItemInserted(0)
+            rvTweets.smoothScrollToPosition(0)
+        }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     fun populateHomeTimeline() {
@@ -98,5 +114,8 @@ class TimelineActivity : AppCompatActivity() {
 
         } )
 
+    }
+    companion object {
+        val REQUEST_CODE = 10
     }
 }

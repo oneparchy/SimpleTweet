@@ -16,7 +16,7 @@ object TimeFormatter {
         val format = SimpleDateFormat(twitterFormat, Locale.ENGLISH)
         format.isLenient = true
         try {
-            val diff = (System.currentTimeMillis() - format.parse(rawJsonDate).time) / 1000 + 28800     //add 8 hour offset (28800s). I don't know why I had to do this.
+            val diff = (System.currentTimeMillis() - format.parse(rawJsonDate).time) / 1000
             //Log.i("Time","Time Diff: $diff")          //<-- Log message to see actual time diff in seconds being processed
             if (diff < 5) time = "Just now" else if (diff < 60) time =
                 String.format(Locale.ENGLISH, "%ds", diff) else if (diff < 60 * 60) time =

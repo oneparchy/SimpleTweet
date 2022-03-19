@@ -38,8 +38,7 @@ class TweetsAdapter(private val tweets: ArrayList<Tweet>) : RecyclerView.Adapter
         holder.tvTweetBody.text = tweet.body
         holder.tvTweetAge.text = tweet.getFormattedTimestamp()
         //use glide to load the profile image into the image view
-        Glide.with(holder.itemView).load(tweet.user?.publicImageUrl).into(holder.ivProfileImage)
-
+        Glide.with(holder.itemView).load(tweet.user?.publicImageURL).into(holder.ivProfileImage)
     }
 
     override fun getItemCount(): Int {
